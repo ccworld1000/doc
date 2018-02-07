@@ -118,7 +118,10 @@ clean-images:
 clean-search:
 	rm -f html/js/search.js
 
-clean: clean-html clean-images clean-search clean-examples
+clean-precompiled:
+	rm -rf lib/Pod/precompiled
+
+clean: clean-html clean-images clean-search clean-examples clean-precompiled
 
 test-links: links.txt
 	./util/test-links.sh
