@@ -150,7 +150,6 @@ my $coffee-exe = './highlights/node_modules/coffee-script/bin/coffee';
 sub MAIN(
     Bool :$typegraph = False,
     Int  :$sparse,
-    Bool :$disambiguation = True,
     Bool :$no-highlight = False,
     Int  :$parallel = 1,
 ) {
@@ -199,7 +198,7 @@ sub MAIN(
         write-type-source $_;
     }
 
-    write-disambiguation-files if $disambiguation;
+    write-disambiguation-files;
     write-search-file;
     write-index-files;
 
@@ -208,7 +207,7 @@ sub MAIN(
     }
 
     say 'Processing complete.';
-    if $sparse || !$disambiguation {
+    if $sparse {
         say "This is a sparse or incomplete run. DO NOT SYNC WITH doc.perl6.org!";
     }
 
