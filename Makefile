@@ -10,7 +10,7 @@ SELINUX_OPT          := $(shell [ $(DOCKER_SELINUX_LABEL) -eq 1 ] && echo ':Z' |
 	clean-search clean test-links extract-examples push \
 	docker-image docker-htmlify docker-test docker-xtest docker-ctest docker-testall docker-run
 
-html: bigpage htmlify
+html: htmlify
 
 htmlify: init-highlights sass
 	perl6 htmlify.p6 --parallel=1
