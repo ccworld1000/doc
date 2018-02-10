@@ -151,7 +151,6 @@ sub MAIN(
     Bool :$typegraph = False,
     Int  :$sparse,
     Bool :$disambiguation = True,
-    Bool :$search-file = True,
     Bool :$no-highlight = False,
     Int  :$parallel = 1,
 ) {
@@ -201,7 +200,7 @@ sub MAIN(
     }
 
     write-disambiguation-files if $disambiguation;
-    write-search-file          if $search-file;
+    write-search-file;
     write-index-files;
 
     for (set(<routine syntax>) (&) set($*DR.get-kinds)).keys -> $kind {
@@ -209,7 +208,7 @@ sub MAIN(
     }
 
     say 'Processing complete.';
-    if $sparse || !$search-file || !$disambiguation {
+    if $sparse || !$disambiguation {
         say "This is a sparse or incomplete run. DO NOT SYNC WITH doc.perl6.org!";
     }
 
