@@ -11,6 +11,8 @@ use URI::Escape;
 use Perl6::Documentable::Registry;
 use Perl6::TypeGraph;
 use Perl6::TypeGraph::Viz;
+use Build::Dependency;
+
 use Pod::Convenience;
 use Pod::Htmlify;
 use OO::Monitors;
@@ -154,10 +156,9 @@ sub MAIN(
     Int  :$parallel = 1,
 ) {
     if !$no-highlight {
-        if ! $coffee-exe.IO.f {
-            say "Could not find $coffee-exe, did you run `make init-highlights`?";
-            exit 1;
-        }
+        Build::Dependency::require(
+            'executable', $coffee-exe, :suggest(<make init-highlights>)
+        );
         $proc = Proc::Async.new($coffee-exe, './highlights/highlight-filename-from-stdin.coffee', :r, :w);
         $proc-supply = $proc.stdout.lines;
     }
