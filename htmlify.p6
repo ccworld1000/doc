@@ -160,10 +160,11 @@ sub MAIN(
         $proc = Proc::Async.new($coffee-exe, './highlights/highlight-filename-from-stdin.coffee', :r, :w);
         $proc-supply = $proc.stdout.lines;
     }
-    say 'Creating html/subdirectories ...';
 
     for <programs type language routine images syntax> {
-        mkdir "html/$_" unless "html/$_".IO ~~ :e;
+        Build::Dependency::require(
+            'directory', "html/$_"
+        );
     }
 
     my $*DR = Perl6::Documentable::Registry.new;
