@@ -12,7 +12,7 @@ HTML文档 [https://docs.perl6.org/](https://docs.perl6.org/).
 
 ## 其他语言README
 
-[English README](README.md)
+[English README](README.en.md)
 
 ## 安装 p6doc
 
